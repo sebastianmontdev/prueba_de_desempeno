@@ -1,0 +1,70 @@
+@model IEnumerable<VetClinic.Models.Reserva>
+
+@{
+    ViewData["Title"] = "Gestión de Reservas";
+}
+
+<h1>Listado de Reservas</h1>
+
+<!-- Filtros -->
+<div class="card mb-4 bg-light">
+    <div class="card-body">
+        <form asp-action="Index" method="get" class="row g-3">
+            <div class="col-md-4">
+                <label class="form-label">Filtrar por Usuario:</label>
+                <select name="usuarioId" class="form-select" asp-items="ViewBag.Usuarios">
+                    <option value="">-- Todos los usuarios --</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Filtrar por Espacio:</label>
+                <select name="espacioId" class="form-select" asp-items="ViewBag.Espacios">
+                    <option value="">-- Todos los espacios --</option>
+                </select>
+            </div>
+            <div class="col-md-4 d-flex align-items-end">
+                <button type="submit" class="btn btn-secondary me-2">Filtrar</button>
+                <a asp-action="Index" class="btn btn-outline-secondary">Limpiar</a>
+                <a asp-action="Create" class="btn btn-primary ms-auto">Nueva Reserva</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<table class="table table-bordered">
+    <thead class="table-dark">
+        <tr>
+            <th>Usuario</th>
+            <th>Espacio Deportivo</th>
+            <th>Fecha</th>
+            <th>Horario</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>@item.Usuario?.Nombre</td>
+            <td>@item.EspacioDeportivo?.Nombre</td>
+            <td>@item.Fecha.ToLongDateString()</td>
+            <td>@item.HoraInicio - @item.HoraFin</td>
+            <td>
+                @if (item.Estado == "Activa") {
+                    <span class="badge bg-success">Activa</span>
+                } else if (item.Estado == "Cancelada") {
+                    <span class="badge bg-danger">Cancelada</span>
+                } else {
+                    <span class="badge bg-info">@item.Estado</span>
+                }
+            </td>
+            <td>
+                @if (item.Estado == "Activa") {
+                    <a asp-action="Cancelar" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger" 
+                       onclick="return confirm('¿Estás seguro de cancelar esta reserva?')">Cancelar</a>
+                }
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

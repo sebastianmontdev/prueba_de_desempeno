@@ -1,0 +1,38 @@
+@{
+    ViewData["Title"] = "Inicio";
+}
+
+<div class="text-center py-5">
+    <h1 class="display-4 fw-bold text-primary">Sistema de Gestión Deportiva</h1>
+    <p class="lead mb-4">Administra usuarios, espacios y reservas de forma eficiente y sin conflictos de horarios.</p>
+    
+    <div class="row mt-5">
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm border-0 bg-light">
+                <div class="card-body">
+                    <h3 class="card-title">Usuarios</h3>
+                    <p class="card-text text-muted">Gestiona el registro y la información de los deportistas.</p>
+                    <a asp-controller="Usuarios" asp-action="Index" class="btn btn-outline-primary">Ver Usuarios</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm border-0 bg-light">
+                <div class="card-body">
+                    <h3 class="card-title">Espacios</h3>
+                    <p class="card-text text-muted">Configura las canchas, piscinas y salones disponibles.</p>
+                    <a asp-controller="Espacios" asp-action="Index" class="btn btn-outline-primary">Ver Espacios</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm border-0 bg-light">
+                <div class="card-body">
+                    <h3 class="card-title">Reservas</h3>
+                    <p class="card-text text-muted">Controla el calendario y evita duplicidad de horarios.</p>
+                    <a asp-controller="Reservas" asp-action="Index" class="btn btn-primary">Gestionar Reservas</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

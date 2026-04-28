@@ -1,0 +1,51 @@
+@model IEnumerable<VetClinic.Models.EspacioDeportivo>
+
+@{
+    ViewData["Title"] = "Espacios Deportivos";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h1>Espacios Deportivos</h1>
+    <a asp-action="Create" class="btn btn-primary">Registrar Nuevo Espacio</a>
+</div>
+
+<!-- Filtro de búsqueda -->
+<div class="card mb-4">
+    <div class="card-body">
+        <form asp-action="Index" method="get" class="row g-3">
+            <div class="col-auto">
+                <label class="col-form-label">Filtrar por tipo:</label>
+            </div>
+            <div class="col-auto">
+                <input type="text" name="tipo" class="form-control" value="@ViewBag.TipoActual" placeholder="Ej: Fútbol, Piscina..." />
+            </div>
+            <div class="col-auto">
+                <button type="submit" class="btn btn-secondary">Buscar</button>
+                <a asp-action="Index" class="btn btn-outline-secondary">Limpiar</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<table class="table table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>Nombre</th>
+            <th>Tipo</th>
+            <th>Capacidad</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>@item.Nombre</td>
+            <td>@item.TipoEspacio</td>
+            <td>@item.Capacidad personas</td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">Editar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

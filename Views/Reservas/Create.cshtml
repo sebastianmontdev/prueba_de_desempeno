@@ -1,0 +1,73 @@
+@model VetClinic.Models.Reserva
+
+@{
+    ViewData["Title"] = "Nueva Reserva";
+}
+
+<h1>Crear Nueva Reserva</h1>
+<hr />
+
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Create">
+            <!-- Resumen de errores de validación del servidor -->
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+            <div class="form-group mb-3">
+                <label asp-for="UsuarioId" class="control-label">Seleccionar Usuario</label>
+                <select asp-for="UsuarioId" class="form-select" asp-items="ViewBag.UsuarioId">
+                    <option value="">-- Seleccione un usuario --</option>
+                </select>
+                <span asp-validation-for="UsuarioId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="EspacioId" class="control-label">Seleccionar Espacio Deportivo</label>
+                <select asp-for="EspacioId" class="form-select" asp-items="ViewBag.EspacioId">
+                    <option value="">-- Seleccione un espacio --</option>
+                </select>
+                <span asp-validation-for="EspacioId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Fecha" class="control-label"></label>
+                <input asp-for="Fecha" class="form-control" type="date" />
+                <span asp-validation-for="Fecha" class="text-danger"></span>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="HoraInicio" class="control-label"></label>
+                    <input asp-for="HoraInicio" class="form-control" type="time" />
+                    <span asp-validation-for="HoraInicio" class="text-danger"></span>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="HoraFin" class="control-label"></label>
+                    <input asp-for="HoraFin" class="form-control" type="time" />
+                    <span asp-validation-for="HoraFin" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group mt-4">
+                <button type="submit" class="btn btn-success">Confirmar Reserva</button>
+                <a asp-action="Index" class="btn btn-secondary">Volver al Listado</a>
+            </div>
+        </form>
+    </div>
+    
+    <div class="col-md-5 offset-md-1">
+        <div class="alert alert-info">
+            <h5>Reglas de Negocio:</h5>
+            <ul>
+                <li>No se permiten reservas en fechas u horas pasadas.</li>
+                <li>La hora de fin debe ser mayor a la de inicio.</li>
+                <li>No puede haber cruces de horario en el mismo espacio.</li>
+                <li>Un usuario no puede tener dos reservas al mismo tiempo.</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
