@@ -15,5 +15,5 @@ namespace VetClinic.Data
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<EspacioDeportivo> EspaciosDeportivos { get; set; }
         public DbSet<Reserva> Reservas { get; set; }
-    }
+    } 
 }
